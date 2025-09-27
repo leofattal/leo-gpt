@@ -1,4 +1,6 @@
 import { createServerSupabaseClient } from "@/lib/supabase-server";
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 
 export async function POST(request: Request) {
   try {
@@ -15,12 +17,18 @@ export async function POST(request: Request) {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    // For MVP, return a simple response
-    // TODO: Implement actual OpenAI integration
-    const userMessage = messages[messages.length - 1];
-    const response = `Thank you for your message: "${userMessage.content}". This is a placeholder response from LeoGPT. OpenAI integration will be added once proper API keys are configured.`;
+    // Generate response using OpenAI GPT-4o
+    const result = await generateText({
+      model: openai("gpt-4o"),
+      messages: messages.map((msg: any) => ({
+        role: msg.role,
+        content: msg.content,
+      })),
+      temperature: 0.7,
+      maxTokens: 1000,
+    });
 
-    return new Response(response, {
+    return new Response(result.text, {
       headers: {
         "Content-Type": "text/plain",
       },

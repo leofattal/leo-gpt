@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase";
 import { useAuth } from "./use-auth";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Message } from "@/lib/types/chat";
 
 export function useChat(conversationId?: string) {
@@ -121,6 +121,44 @@ export function useChat(conversationId?: string) {
     },
     [user, conversationId, supabase]
   );
+
+  // Load existing messages when conversationId changes
+  useEffect(() => {
+    const loadMessages = async () => {
+      if (!conversationId || !user) {
+        setMessages([]);
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from("messages")
+          .select("*")
+          .eq("conversation_id", conversationId)
+          .order("created_at", { ascending: true });
+
+        if (error) throw error;
+
+        const formattedMessages: Message[] = data.map((msg) => ({
+          id: msg.id,
+          content: msg.content,
+          role: msg.role as "user" | "assistant",
+          timestamp: new Date(msg.created_at),
+          metadata: msg.metadata || undefined,
+        }));
+
+        setMessages(formattedMessages);
+      } catch (error) {
+        console.error("Error loading messages:", error);
+        setError(error instanceof Error ? error : new Error("Unknown error"));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadMessages();
+  }, [conversationId, user, supabase]);
 
   return {
     messages,
