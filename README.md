@@ -15,16 +15,19 @@ An intelligent, multimodal AI chatbot application that provides users with a sea
 ## 📦 Dependencies
 
 ### AI Services
+
 - `ai` - Vercel AI SDK v5
 - `@ai-sdk/openai` - OpenAI integration
 - `@ai-sdk/google` - Google Gemini integration
 - `openai` - OpenAI official SDK
 
 ### Database & Auth
+
 - `@supabase/supabase-js` - Supabase client
 - `@supabase/ssr` - Server-side rendering support
 
 ### UI & Styling
+
 - `tailwindcss` - Utility-first CSS framework
 - `shadcn/ui` dependencies:
   - `class-variance-authority`
@@ -36,23 +39,27 @@ An intelligent, multimodal AI chatbot application that provides users with a sea
 ## 🛠️ Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ installed
 - pnpm installed globally (`npm install -g pnpm`)
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone <repository-url>
    cd leo-gpt
    ```
 
 2. Install dependencies:
+
    ```bash
    pnpm install
    ```
 
 3. Set up environment variables:
+
    ```bash
    cp .env.example .env.local
    ```
@@ -65,6 +72,7 @@ An intelligent, multimodal AI chatbot application that provides users with a sea
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 4. Run the development server:
+
    ```bash
    pnpm run dev
    ```
@@ -104,16 +112,19 @@ src/
 ## 🔧 Configuration
 
 ### TypeScript
+
 - Strict mode enabled
 - Path aliases configured (`@/` for `src/`)
 - Next.js plugin enabled
 
 ### Tailwind CSS
+
 - shadcn/ui color system
 - Custom animations
 - Dark mode support
 
 ### ESLint
+
 - Next.js recommended configuration
 - TypeScript support
 

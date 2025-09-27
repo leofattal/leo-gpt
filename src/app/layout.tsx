@@ -6,7 +6,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "LeoGPT - AI Assistant",
-  description: "An intelligent, multimodal AI chatbot application that provides users with a seamless conversational experience across text, voice, and image inputs.",
+  description:
+    "An intelligent, multimodal AI chatbot application that provides users with a seamless conversational experience across text, voice, and image inputs.",
 };
 
 export default function RootLayout({
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>{children}</body>
     </html>
   );

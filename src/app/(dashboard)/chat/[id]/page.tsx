@@ -1,16 +1,16 @@
-import { ChatInterface } from '@/components/chat/chat-interface'
+import { ChatInterface } from "@/components/chat/chat-interface";
 
 interface ChatPageProps {
-  params: Promise<{ id: string }>
+  params: Promise<{ id: string }>;
 }
 
 export default async function ConversationPage({ params }: ChatPageProps) {
-  const { id } = await params
+  const { id } = await params;
 
-  return <ChatInterface conversationId={id} />
+  return <ChatInterface conversationId={id} />;
 }
 
 export const metadata = {
-  title: 'Chat - LeoGPT',
-  description: 'Chat with AI using LeoGPT',
-}
+  title: "Chat - LeoGPT",
+  description: "Chat with AI using LeoGPT",
+};

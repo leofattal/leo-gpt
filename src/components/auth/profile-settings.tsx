@@ -1,123 +1,127 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useAuth } from '@/lib/hooks/use-auth'
-import { createClient } from '@/lib/supabase'
-import { useState, useEffect } from 'react'
-import { User, Mail, Calendar, Trash2 } from 'lucide-react'
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { createClient } from "@/lib/supabase";
+import { useState, useEffect } from "react";
+import { User, Mail, Calendar, Trash2 } from "lucide-react";
 
 interface UserProfile {
-  id: string
-  email: string
-  display_name: string | null
-  created_at: string
-  last_active_at: string
+  id: string;
+  email: string;
+  display_name: string | null;
+  created_at: string;
+  last_active_at: string;
 }
 
 export function ProfileSettings() {
-  const { user, signOut } = useAuth()
-  const [profile, setProfile] = useState<UserProfile | null>(null)
-  const [displayName, setDisplayName] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [saving, setSaving] = useState(false)
-  const supabase = createClient()
+  const { user, signOut } = useAuth();
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [displayName, setDisplayName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const supabase = createClient();
 
   // Load user profile
   useEffect(() => {
     const loadProfile = async () => {
-      if (!user) return
+      if (!user) return;
 
       try {
-        setLoading(true)
+        setLoading(true);
         const { data, error } = await supabase
-          .from('user_profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single()
+          .from("user_profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
 
-        if (error) throw error
+        if (error) throw error;
 
-        setProfile(data)
-        setDisplayName(data.display_name || '')
+        setProfile(data);
+        setDisplayName(data.display_name || "");
       } catch (error) {
-        console.error('Error loading profile:', error)
+        console.error("Error loading profile:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadProfile()
-  }, [user, supabase])
+    loadProfile();
+  }, [user, supabase]);
 
   // Save profile changes
   const handleSaveProfile = async () => {
-    if (!user || !profile) return
+    if (!user || !profile) return;
 
     try {
-      setSaving(true)
+      setSaving(true);
       const { error } = await supabase
-        .from('user_profiles')
+        .from("user_profiles")
         .update({
           display_name: displayName || null,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', user.id)
+        .eq("id", user.id);
 
-      if (error) throw error
+      if (error) throw error;
 
-      setProfile(prev => prev ? { ...prev, display_name: displayName } : null)
+      setProfile((prev) =>
+        prev ? { ...prev, display_name: displayName } : null
+      );
     } catch (error) {
-      console.error('Error saving profile:', error)
+      console.error("Error saving profile:", error);
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  };
 
   const handleDeleteAccount = async () => {
-    if (!user) return
+    if (!user) return;
 
     const confirmed = window.confirm(
-      'Are you sure you want to delete your account? This action cannot be undone.'
-    )
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
 
     if (confirmed) {
       try {
         // Delete user profile (conversations and messages will be cascade deleted due to foreign keys)
-        await supabase
-          .from('user_profiles')
-          .delete()
-          .eq('id', user.id)
+        await supabase.from("user_profiles").delete().eq("id", user.id);
 
         // Sign out the user
-        await signOut()
+        await signOut();
       } catch (error) {
-        console.error('Error deleting account:', error)
+        console.error("Error deleting account:", error);
       }
     }
-  }
+  };
 
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
         <div className="text-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent mx-auto mb-2" />
+          <div className="mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           <p className="text-sm text-muted-foreground">Loading profile...</p>
         </div>
       </div>
-    )
+    );
   }
 
   if (!profile) {
     return (
-      <div className="text-center py-8">
+      <div className="py-8 text-center">
         <p className="text-muted-foreground">Profile not found</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -141,7 +145,7 @@ export function ProfileSettings() {
             </Avatar>
             <div>
               <h3 className="text-lg font-medium">
-                {profile.display_name || 'No display name'}
+                {profile.display_name || "No display name"}
               </h3>
               <p className="text-sm text-muted-foreground">{profile.email}</p>
             </div>
@@ -163,7 +167,7 @@ export function ProfileSettings() {
             disabled={saving}
             className="w-full sm:w-auto"
           >
-            {saving ? 'Saving...' : 'Save Changes'}
+            {saving ? "Saving..." : "Save Changes"}
           </Button>
         </CardContent>
       </Card>
@@ -177,7 +181,7 @@ export function ProfileSettings() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="flex items-center space-x-2">
               <Mail className="h-4 w-4 text-muted-foreground" />
               <div>
@@ -212,14 +216,15 @@ export function ProfileSettings() {
             onClick={handleDeleteAccount}
             className="w-full sm:w-auto"
           >
-            <Trash2 className="h-4 w-4 mr-2" />
+            <Trash2 className="mr-2 h-4 w-4" />
             Delete Account
           </Button>
-          <p className="text-xs text-muted-foreground mt-2">
-            This will permanently delete your account, conversations, and all associated data.
+          <p className="mt-2 text-xs text-muted-foreground">
+            This will permanently delete your account, conversations, and all
+            associated data.
           </p>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

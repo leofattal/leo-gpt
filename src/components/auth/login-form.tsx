@@ -1,33 +1,39 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { useAuth } from '@/lib/hooks/use-auth'
-import { useState } from 'react'
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { useState } from "react";
 
 export function LoginForm() {
-  const [isLoading, setIsLoading] = useState(false)
-  const { signInWithGoogle } = useAuth()
+  const [isLoading, setIsLoading] = useState(false);
+  const { signInWithGoogle } = useAuth();
 
   const handleGoogleSignIn = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      await signInWithGoogle()
+      await signInWithGoogle();
     } catch (error) {
-      console.error('Sign in error:', error)
+      console.error("Sign in error:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome to LeoGPT</CardTitle>
-          <CardDescription>
-            Sign in to start chatting with AI
-          </CardDescription>
+          <CardTitle className="text-2xl font-bold">
+            Welcome to LeoGPT
+          </CardTitle>
+          <CardDescription>Sign in to start chatting with AI</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <Button
@@ -68,5 +74,5 @@ export function LoginForm() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

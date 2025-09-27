@@ -1,8 +1,8 @@
-import { ProfileSettings } from '@/components/auth/profile-settings'
+import { ProfileSettings } from "@/components/auth/profile-settings";
 
 export default function ProfilePage() {
   return (
-    <div className="container max-w-2xl mx-auto p-6">
+    <div className="container mx-auto max-w-2xl p-6">
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold">Profile Settings</h1>
@@ -13,10 +13,10 @@ export default function ProfilePage() {
         <ProfileSettings />
       </div>
     </div>
-  )
+  );
 }
 
 export const metadata = {
-  title: 'Profile - LeoGPT',
-  description: 'Manage your profile settings',
-}
+  title: "Profile - LeoGPT",
+  description: "Manage your profile settings",
+};

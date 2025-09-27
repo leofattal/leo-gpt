@@ -1,31 +1,27 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
-import { Plus, MessageSquare, Trash2, Loader2 } from 'lucide-react'
-import { useConversations } from '@/lib/hooks/use-conversations'
-import { useRouter } from 'next/navigation'
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Plus, MessageSquare, Trash2, Loader2 } from "lucide-react";
+import { useConversations } from "@/lib/hooks/use-conversations";
+import { useRouter } from "next/navigation";
 
 export function ChatSidebar() {
-  const {
-    conversations,
-    loading,
-    createConversation,
-    deleteConversation,
-  } = useConversations()
-  const router = useRouter()
+  const { conversations, loading, createConversation, deleteConversation } =
+    useConversations();
+  const router = useRouter();
 
   const handleNewChat = async () => {
-    const conversationId = await createConversation()
+    const conversationId = await createConversation();
     if (conversationId) {
-      router.push(`/chat/${conversationId}`)
+      router.push(`/chat/${conversationId}`);
     }
-  }
+  };
 
   const handleDeleteConversation = async (id: string) => {
-    await deleteConversation(id)
-  }
+    await deleteConversation(id);
+  };
 
   return (
     <div className="flex h-full w-80 flex-col border-r border-border bg-background">
@@ -47,19 +43,19 @@ export function ChatSidebar() {
       <ScrollArea className="flex-1 px-2">
         <div className="space-y-1 p-2">
           {loading ? (
-            <div className="text-center py-8">
-              <Loader2 className="mx-auto h-8 w-8 text-muted-foreground mb-2 animate-spin" />
+            <div className="py-8 text-center">
+              <Loader2 className="mx-auto mb-2 h-8 w-8 animate-spin text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
                 Loading conversations...
               </p>
             </div>
           ) : conversations.length === 0 ? (
-            <div className="text-center py-8">
-              <MessageSquare className="mx-auto h-8 w-8 text-muted-foreground mb-2" />
+            <div className="py-8 text-center">
+              <MessageSquare className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
                 No conversations yet
               </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="mt-1 text-xs text-muted-foreground">
                 Start a new chat to begin
               </p>
             </div>
@@ -70,14 +66,14 @@ export function ChatSidebar() {
                 className="group relative flex cursor-pointer items-center rounded-lg p-3 hover:bg-muted"
                 onClick={() => router.push(`/chat/${conversation.id}`)}
               >
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium">
                     {conversation.title}
                   </p>
-                  <p className="text-xs text-muted-foreground truncate">
+                  <p className="truncate text-xs text-muted-foreground">
                     {conversation.messageCount} messages
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     {new Date(conversation.lastMessageAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -85,10 +81,10 @@ export function ChatSidebar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="opacity-0 group-hover:opacity-100 ml-2 h-6 w-6"
+                  className="ml-2 h-6 w-6 opacity-0 group-hover:opacity-100"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    handleDeleteConversation(conversation.id)
+                    e.stopPropagation();
+                    handleDeleteConversation(conversation.id);
                   }}
                 >
                   <Trash2 className="h-3 w-3" />
@@ -99,5 +95,5 @@ export function ChatSidebar() {
         </div>
       </ScrollArea>
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import { ChatSidebar } from '@/components/chat/chat-sidebar'
-import { ChatHeader } from '@/components/chat/chat-header'
+import { ChatSidebar } from "@/components/chat/chat-sidebar";
+import { ChatHeader } from "@/components/chat/chat-header";
 
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="flex h-screen overflow-hidden">
@@ -14,12 +14,10 @@ export default function DashboardLayout({
       </div>
 
       {/* Main content area */}
-      <div className="flex flex-1 flex-col min-w-0">
+      <div className="flex min-w-0 flex-1 flex-col">
         <ChatHeader />
-        <main className="flex-1 overflow-hidden">
-          {children}
-        </main>
+        <main className="flex-1 overflow-hidden">{children}</main>
       </div>
     </div>
-  )
+  );
 }

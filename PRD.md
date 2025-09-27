@@ -1,7 +1,9 @@
 # Product Requirements Document (PRD)
+
 ## AI Chatbot Application - "LeoGPT"
 
 ### Document Information
+
 - **Version**: 1.0
 - **Date**: September 26, 2025
 - **Author**: Product Team
@@ -14,6 +16,7 @@
 LeoGPT is an intelligent, multimodal AI chatbot application that provides users with a seamless conversational experience across text, voice, and image inputs. The application leverages multiple AI models to deliver optimal responses based on input type and confidence levels, with intelligent fallback mechanisms for enhanced accuracy.
 
 ### Key Value Propositions
+
 - **Multimodal Intelligence**: Seamlessly handles text, voice, and image inputs
 - **Smart Model Routing**: Automatically selects the best AI model for each interaction
 - **Confidence-Based Search**: Enhances responses with web search when needed
@@ -25,6 +28,7 @@ LeoGPT is an intelligent, multimodal AI chatbot application that provides users 
 ## 2. Problem Statement
 
 Current AI chatbot solutions suffer from several limitations:
+
 - **Single-modal constraints**: Most chatbots only handle text effectively
 - **Model limitations**: Reliance on a single AI model reduces response quality
 - **Confidence gaps**: No fallback mechanism when AI confidence is low
@@ -32,6 +36,7 @@ Current AI chatbot solutions suffer from several limitations:
 - **Data isolation issues**: Inadequate user data protection and session management
 
 ### Target Users
+
 - **Primary**: Tech-savvy individuals seeking advanced AI assistance
 - **Secondary**: Professionals requiring multimodal AI support
 - **Tertiary**: Organizations needing intelligent customer service solutions
@@ -41,12 +46,14 @@ Current AI chatbot solutions suffer from several limitations:
 ## 3. Goals & Success Metrics
 
 ### Primary Goals
+
 1. **Performance Excellence**: Achieve <2s response time for text, <4s for multimodal
 2. **User Engagement**: Maintain 70%+ weekly active user retention
 3. **Accuracy Enhancement**: Improve response accuracy by 25% through intelligent routing
 4. **Multimodal Adoption**: 40%+ of interactions include voice/image components
 
 ### Key Performance Indicators (KPIs)
+
 - **Response Latency**: Average response time by input type
 - **User Retention**: Weekly/Monthly active users
 - **Session Duration**: Average conversation length
@@ -59,6 +66,7 @@ Current AI chatbot solutions suffer from several limitations:
 ## 4. Architecture Overview
 
 ### Technology Stack
+
 - **Frontend**: Next.js 15 + TypeScript + App Router
 - **Package Manager**: pnpm with workspace support
 - **UI Framework**: shadcn/ui + Tailwind CSS
@@ -73,6 +81,7 @@ Current AI chatbot solutions suffer from several limitations:
   - EXA API (web search fallback)
 
 ### System Architecture
+
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   Next.js App   │────│  Vercel Edge     │────│   AI Services   │
@@ -95,24 +104,28 @@ Current AI chatbot solutions suffer from several limitations:
 ### 5.1 Core Chat Experience
 
 #### FR-1: Multimodal Input Support
+
 - **Text Input**: Standard text messaging with markdown support
 - **Voice Input**: Real-time speech-to-text conversion
 - **Image Input**: Upload and analyze images (JPEG, PNG, WebP)
 - **File Attachments**: Support for common document formats
 
 #### FR-2: Intelligent Model Routing
+
 - **Text Queries**: Route to GPT-4o for natural language processing
 - **Voice Queries**: Process through Gemini speech models
 - **Image Queries**: Analyze using Gemini vision models
 - **Mixed Input**: Handle combinations of text, voice, and images
 
 #### FR-3: Confidence-Based Fallback
+
 - **Confidence Scoring**: Evaluate GPT-4o response confidence
 - **Automatic Search**: Trigger EXA search when confidence < threshold
 - **Enhanced Responses**: Combine AI reasoning with search results
 - **Source Attribution**: Clearly indicate when web search is used
 
 #### FR-4: Real-time Streaming
+
 - **Progressive Responses**: Stream AI responses as they generate
 - **Typing Indicators**: Show AI processing status
 - **Response Cancellation**: Allow users to stop ongoing responses
@@ -121,12 +134,14 @@ Current AI chatbot solutions suffer from several limitations:
 ### 5.2 User Account Management
 
 #### FR-5: Authentication System
+
 - **OAuth Integration**: Google, GitHub, Discord sign-in
 - **Email/Password**: Traditional authentication option
 - **Session Management**: Secure token handling with refresh
 - **Account Recovery**: Password reset and account recovery flows
 
 #### FR-6: User Profiles
+
 - **Profile Management**: Update personal information and preferences
 - **Usage Analytics**: Personal usage statistics and insights
 - **Preference Settings**: Customize AI behavior and interface
@@ -135,12 +150,14 @@ Current AI chatbot solutions suffer from several limitations:
 ### 5.3 Conversation Management
 
 #### FR-7: Session Persistence
+
 - **Auto-save**: Continuous conversation backup
 - **Cross-device Sync**: Access conversations from any device
 - **Conversation History**: Searchable message archive
 - **Session Organization**: Categorize and tag conversations
 
 #### FR-8: Privacy Controls
+
 - **History Management**: Clear individual messages or entire sessions
 - **Data Retention**: Configurable data retention policies
 - **Export Options**: Download conversations in multiple formats
@@ -149,12 +166,14 @@ Current AI chatbot solutions suffer from several limitations:
 ### 5.4 Search & Retrieval
 
 #### FR-9: EXA Integration
+
 - **Automatic Triggering**: Activate based on confidence thresholds
 - **Query Optimization**: Transform AI queries for optimal search
 - **Result Processing**: Synthesize search results with AI responses
 - **Source Management**: Track and display information sources
 
 #### FR-10: Search Transparency
+
 - **Search Indicators**: Visual cues when search is active
 - **Source Links**: Direct links to referenced content
 - **Confidence Display**: Show AI confidence levels to users
@@ -167,12 +186,14 @@ Current AI chatbot solutions suffer from several limitations:
 ### 6.1 Performance Requirements
 
 #### NFR-1: Response Latency
+
 - **Text Responses**: < 2 seconds average
 - **Voice Processing**: < 4 seconds end-to-end
 - **Image Analysis**: < 4 seconds for standard images
 - **Search Fallback**: < 6 seconds including web search
 
 #### NFR-2: Scalability
+
 - **Concurrent Users**: Support 10,000+ simultaneous users
 - **Message Throughput**: Handle 1M+ messages per day
 - **Auto-scaling**: Dynamic resource allocation based on demand
@@ -181,12 +202,14 @@ Current AI chatbot solutions suffer from several limitations:
 ### 6.2 Security Requirements
 
 #### NFR-3: Data Protection
+
 - **Encryption**: End-to-end encryption for all communications
 - **Row-Level Security**: Supabase RLS for data isolation
 - **API Security**: Rate limiting and authentication for all endpoints
 - **Compliance**: GDPR and CCPA compliance
 
 #### NFR-4: Authentication Security
+
 - **Multi-factor Authentication**: Optional 2FA for enhanced security
 - **Session Security**: Secure token management and rotation
 - **OAuth Security**: Secure third-party authentication flows
@@ -195,12 +218,14 @@ Current AI chatbot solutions suffer from several limitations:
 ### 6.3 Reliability Requirements
 
 #### NFR-5: Availability
+
 - **Uptime Target**: 99.9% availability (8.77 hours downtime/year)
 - **Disaster Recovery**: Automated backup and recovery systems
 - **Monitoring**: Real-time system health monitoring
 - **Alerting**: Automated incident detection and notification
 
 #### NFR-6: Error Handling
+
 - **Graceful Degradation**: Maintain core functionality during partial outages
 - **Retry Logic**: Automatic retry for transient failures
 - **User Feedback**: Clear error messages and recovery suggestions
@@ -213,6 +238,7 @@ Current AI chatbot solutions suffer from several limitations:
 ### 7.1 Frontend Architecture
 
 #### Component Structure (Next.js App Router)
+
 ```
 ├── app/
 │   ├── (auth)/
@@ -272,6 +298,7 @@ Current AI chatbot solutions suffer from several limitations:
 ```
 
 #### Key Technologies
+
 - **Next.js 15**: App Router with server/client components
 - **TypeScript**: Strict mode with path aliases (@/)
 - **pnpm**: Fast, disk space efficient package manager
@@ -284,6 +311,7 @@ Current AI chatbot solutions suffer from several limitations:
 ### 7.2 Backend Architecture
 
 #### Supabase Configuration
+
 ```sql
 -- Users table (extends auth.users)
 CREATE TABLE profiles (
@@ -326,6 +354,7 @@ CREATE TABLE search_queries (
 ```
 
 #### Row-Level Security (RLS) Policies
+
 ```sql
 -- Users can only access their own data
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
@@ -348,8 +377,8 @@ CREATE POLICY "Users can manage own conversations" ON conversations
 CREATE POLICY "Users can manage messages in own conversations" ON messages
   FOR ALL USING (
     EXISTS (
-      SELECT 1 FROM conversations 
-      WHERE conversations.id = messages.conversation_id 
+      SELECT 1 FROM conversations
+      WHERE conversations.id = messages.conversation_id
       AND conversations.user_id = auth.uid()
     )
   );
@@ -358,10 +387,11 @@ CREATE POLICY "Users can manage messages in own conversations" ON messages
 ### 7.3 AI Service Integration
 
 #### Model Routing Logic
+
 ```typescript
 interface AIRequest {
   content: string;
-  type: 'text' | 'voice' | 'image' | 'multimodal';
+  type: "text" | "voice" | "image" | "multimodal";
   files?: File[];
   context?: ConversationContext;
 }
@@ -369,7 +399,7 @@ interface AIRequest {
 interface AIResponse {
   content: string;
   confidence: number;
-  model: 'gpt-4o' | 'gemini-pro' | 'gemini-vision';
+  model: "gpt-4o" | "gemini-pro" | "gemini-vision";
   searchUsed: boolean;
   sources?: SearchResult[];
 }
@@ -377,9 +407,9 @@ interface AIResponse {
 class AIService {
   async processRequest(request: AIRequest): Promise<AIResponse> {
     // Route based on input type
-    if (request.type === 'text') {
+    if (request.type === "text") {
       return this.processWithGPT4o(request);
-    } else if (request.type === 'voice' || request.type === 'image') {
+    } else if (request.type === "voice" || request.type === "image") {
       return this.processWithGemini(request);
     } else {
       return this.processMultimodal(request);
@@ -388,20 +418,28 @@ class AIService {
 
   private async processWithGPT4o(request: AIRequest): Promise<AIResponse> {
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: "gpt-4o",
       messages: this.buildMessages(request),
       stream: true,
     });
 
     const confidence = this.calculateConfidence(response);
-    
+
     if (confidence < CONFIDENCE_THRESHOLD) {
       const searchResults = await this.searchService.search(request.content);
-      const enhancedResponse = await this.enhanceWithSearch(response, searchResults);
+      const enhancedResponse = await this.enhanceWithSearch(
+        response,
+        searchResults
+      );
       return { ...enhancedResponse, searchUsed: true, sources: searchResults };
     }
 
-    return { content: response.content, confidence, model: 'gpt-4o', searchUsed: false };
+    return {
+      content: response.content,
+      confidence,
+      model: "gpt-4o",
+      searchUsed: false,
+    };
   }
 }
 ```
@@ -409,19 +447,20 @@ class AIService {
 ### 7.4 Deployment Configuration
 
 #### Next.js Configuration
+
 ```typescript
 // next.config.ts
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
-    ppr: 'incremental',
+    ppr: "incremental",
   },
   typescript: {
-    tsconfigPath: './tsconfig.json',
+    tsconfigPath: "./tsconfig.json",
   },
   eslint: {
-    dirs: ['app', 'components', 'lib'],
+    dirs: ["app", "components", "lib"],
   },
   env: {
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
@@ -430,12 +469,13 @@ const nextConfig: NextConfig = {
     SUPABASE_URL: process.env.SUPABASE_URL,
     SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
 ```
 
 #### TypeScript Configuration
+
 ```json
 {
   "compilerOptions": {
@@ -471,6 +511,7 @@ export default nextConfig
 ```
 
 #### Package.json Scripts
+
 ```json
 {
   "scripts": {
@@ -510,12 +551,14 @@ export default nextConfig
 ### 8.1 Interface Design Principles
 
 #### Design System
+
 - **Color Palette**: Modern, accessible color scheme with dark/light mode support
 - **Typography**: Clear hierarchy using system fonts for optimal readability
 - **Spacing**: Consistent 8px grid system for visual harmony
 - **Animations**: Subtle micro-interactions to enhance user feedback
 
 #### Component Specifications
+
 - **Chat Bubbles**: Distinct styling for user vs AI messages
 - **Input Area**: Multimodal input with clear visual indicators
 - **File Upload**: Drag-and-drop interface with preview capabilities
@@ -524,6 +567,7 @@ export default nextConfig
 ### 8.2 User Flows
 
 #### Primary User Journey
+
 1. **Landing**: User arrives at application
 2. **Authentication**: Sign up/sign in process
 3. **Onboarding**: Brief tutorial on multimodal capabilities
@@ -533,6 +577,7 @@ export default nextConfig
 7. **Session Management**: Save, organize, or clear conversations
 
 #### Multimodal Interaction Flow
+
 1. **Input Selection**: Choose text, voice, or image input
 2. **Content Processing**: Real-time feedback during processing
 3. **Model Routing**: Transparent indication of AI model selection
@@ -547,12 +592,14 @@ export default nextConfig
 ### 9.1 Data Protection Strategy
 
 #### Privacy by Design
+
 - **Data Minimization**: Collect only necessary user information
 - **Purpose Limitation**: Use data only for stated purposes
 - **Storage Limitation**: Implement configurable data retention policies
 - **Transparency**: Clear privacy policy and data usage notifications
 
 #### Encryption Standards
+
 - **In Transit**: TLS 1.3 for all communications
 - **At Rest**: AES-256 encryption for stored data
 - **Key Management**: Secure key rotation and management practices
@@ -561,12 +608,14 @@ export default nextConfig
 ### 9.2 Compliance Framework
 
 #### Regulatory Compliance
+
 - **GDPR**: European data protection compliance
 - **CCPA**: California consumer privacy compliance
 - **SOC 2**: Security and availability controls
 - **COPPA**: Child privacy protection measures
 
 #### Security Auditing
+
 - **Regular Assessments**: Quarterly security audits
 - **Penetration Testing**: Annual third-party security testing
 - **Vulnerability Management**: Continuous security monitoring
@@ -577,6 +626,7 @@ export default nextConfig
 ## 10. Implementation Roadmap
 
 ### Phase 1: Foundation (Weeks 1-4)
+
 - **Project Setup**: Initialize Next.js 15 project with pnpm, TypeScript, ESLint
 - **Core Infrastructure**: Set up Vercel deployment and Supabase backend
 - **Authentication System**: Implement OAuth and email/password authentication
@@ -584,24 +634,28 @@ export default nextConfig
 - **Database Schema**: Implement user profiles, conversations, and messages tables
 
 ### Phase 2: Multimodal Capabilities (Weeks 5-8)
+
 - **Voice Integration**: Add speech-to-text and text-to-speech capabilities
 - **Image Processing**: Implement image upload and Gemini vision integration
 - **Model Routing**: Create intelligent routing between GPT-4o and Gemini
 - **UI Enhancements**: Develop multimodal input components
 
 ### Phase 3: Intelligence & Search (Weeks 9-12)
+
 - **Confidence Scoring**: Implement AI confidence evaluation
 - **EXA Integration**: Add web search fallback functionality
 - **Response Enhancement**: Combine AI responses with search results
 - **Source Attribution**: Display search sources and links
 
 ### Phase 4: Polish & Performance (Weeks 13-16)
+
 - **Performance Optimization**: Implement caching and response streaming
 - **Error Handling**: Comprehensive error handling and recovery
 - **Security Hardening**: Implement rate limiting and security measures
 - **User Testing**: Conduct user acceptance testing and feedback collection
 
 ### Phase 5: Launch Preparation (Weeks 17-20)
+
 - **Production Deployment**: Set up production environment and monitoring
 - **Documentation**: Complete user documentation and help system
 - **Analytics Integration**: Implement usage tracking and analytics
@@ -614,44 +668,47 @@ export default nextConfig
 ### Technical Risks
 
 #### High-Impact Risks
+
 1. **AI Service Outages**
-   - *Risk*: OpenAI or Gemini API downtime affects core functionality
-   - *Mitigation*: Implement fallback models and graceful degradation
-   - *Probability*: Medium | *Impact*: High
+   - _Risk_: OpenAI or Gemini API downtime affects core functionality
+   - _Mitigation_: Implement fallback models and graceful degradation
+   - _Probability_: Medium | _Impact_: High
 
 2. **Performance Bottlenecks**
-   - *Risk*: High latency during peak usage periods
-   - *Mitigation*: Edge deployment, caching, and auto-scaling
-   - *Probability*: Medium | *Impact*: Medium
+   - _Risk_: High latency during peak usage periods
+   - _Mitigation_: Edge deployment, caching, and auto-scaling
+   - _Probability_: Medium | _Impact_: Medium
 
 3. **Data Privacy Breach**
-   - *Risk*: Unauthorized access to user conversations
-   - *Mitigation*: Encryption, RLS, security audits, and monitoring
-   - *Probability*: Low | *Impact*: High
+   - _Risk_: Unauthorized access to user conversations
+   - _Mitigation_: Encryption, RLS, security audits, and monitoring
+   - _Probability_: Low | _Impact_: High
 
 #### Medium-Impact Risks
+
 1. **Third-party API Changes**
-   - *Risk*: Breaking changes in AI service APIs
-   - *Mitigation*: Version pinning and gradual migration strategies
-   - *Probability*: Medium | *Impact*: Medium
+   - _Risk_: Breaking changes in AI service APIs
+   - _Mitigation_: Version pinning and gradual migration strategies
+   - _Probability_: Medium | _Impact_: Medium
 
 2. **Scaling Challenges**
-   - *Risk*: Infrastructure cannot handle user growth
-   - *Mitigation*: Load testing and scalable architecture design
-   - *Probability*: Low | *Impact*: Medium
+   - _Risk_: Infrastructure cannot handle user growth
+   - _Mitigation_: Load testing and scalable architecture design
+   - _Probability_: Low | _Impact_: Medium
 
 ### Business Risks
 
 #### Market Risks
+
 1. **Competitive Pressure**
-   - *Risk*: Major tech companies launch similar products
-   - *Mitigation*: Focus on unique multimodal capabilities and UX
-   - *Probability*: High | *Impact*: Medium
+   - _Risk_: Major tech companies launch similar products
+   - _Mitigation_: Focus on unique multimodal capabilities and UX
+   - _Probability_: High | _Impact_: Medium
 
 2. **Regulatory Changes**
-   - *Risk*: New AI regulations affect product functionality
-   - *Mitigation*: Compliance monitoring and adaptable architecture
-   - *Probability*: Medium | *Impact*: Medium
+   - _Risk_: New AI regulations affect product functionality
+   - _Mitigation_: Compliance monitoring and adaptable architecture
+   - _Probability_: Medium | _Impact_: Medium
 
 ---
 
@@ -660,13 +717,15 @@ export default nextConfig
 ### Primary Metrics
 
 #### User Engagement
+
 - **Daily Active Users (DAU)**: Target 10,000+ within 6 months
 - **Weekly Retention Rate**: Target 70%+ after month 3
 - **Session Duration**: Target 15+ minutes average
 - **Messages per Session**: Target 20+ messages average
 
 #### Performance Metrics
-- **Response Latency**: 
+
+- **Response Latency**:
   - Text: <2s (95th percentile)
   - Voice: <4s (95th percentile)
   - Image: <4s (95th percentile)
@@ -674,6 +733,7 @@ export default nextConfig
 - **Error Rate**: <0.1% of all requests
 
 #### Business Metrics
+
 - **User Acquisition Cost (CAC)**: Target <$50
 - **Monthly Recurring Revenue (MRR)**: Growth tracking
 - **Net Promoter Score (NPS)**: Target 50+
@@ -682,12 +742,14 @@ export default nextConfig
 ### Secondary Metrics
 
 #### Feature Adoption
+
 - **Multimodal Usage**: 40%+ of sessions include voice/image
 - **Search Fallback Usage**: 15-25% of queries trigger EXA search
 - **Cross-device Usage**: 30%+ of users access from multiple devices
 - **Feature Discovery**: Track usage of advanced features
 
 #### Technical Health
+
 - **API Response Times**: Monitor all third-party integrations
 - **Database Performance**: Query execution times and optimization
 - **Security Incidents**: Zero tolerance for data breaches
@@ -700,12 +762,14 @@ export default nextConfig
 ### Short-term Roadmap (6-12 months)
 
 #### Advanced Features
+
 - **Plugin System**: Allow third-party integrations (calendars, CRM, etc.)
 - **Custom AI Personalities**: User-configurable AI behavior and tone
 - **Advanced File Support**: PDF, Word document processing
 - **Conversation Templates**: Pre-built conversation starters
 
 #### Performance Improvements
+
 - **Offline Mode**: Basic functionality without internet connection
 - **Progressive Web App**: Native app-like experience
 - **Advanced Caching**: Intelligent response caching
@@ -714,12 +778,14 @@ export default nextConfig
 ### Long-term Vision (1-2 years)
 
 #### Enterprise Features
+
 - **Team Workspaces**: Shared conversations and collaboration
 - **Admin Dashboard**: Usage analytics and user management
 - **API Access**: Developer API for third-party integrations
 - **White-label Solutions**: Customizable branding for enterprises
 
 #### Advanced AI Capabilities
+
 - **Memory System**: Long-term conversation memory across sessions
 - **Proactive Assistance**: AI-initiated helpful suggestions
 - **Multi-language Support**: Global language capabilities
@@ -732,6 +798,7 @@ export default nextConfig
 Chat Blossom represents a significant advancement in AI chatbot technology, combining multimodal capabilities with intelligent model routing and confidence-based search enhancement. The application addresses key limitations in current solutions while providing a secure, scalable, and user-friendly experience.
 
 ### Key Success Factors
+
 1. **Technical Excellence**: Robust architecture with optimal performance
 2. **User Experience**: Intuitive interface with powerful capabilities
 3. **Security First**: Comprehensive data protection and privacy measures
@@ -739,6 +806,7 @@ Chat Blossom represents a significant advancement in AI chatbot technology, comb
 5. **Continuous Innovation**: Roadmap for ongoing feature development
 
 ### Next Steps
+
 1. **Stakeholder Approval**: Review and approve PRD with all stakeholders
 2. **Technical Planning**: Detailed technical specifications and architecture review
 3. **Resource Allocation**: Assign development team and timeline confirmation
@@ -750,6 +818,7 @@ Chat Blossom represents a significant advancement in AI chatbot technology, comb
 ## Appendices
 
 ### Appendix A: Technical Dependencies
+
 - **Frontend**: Next.js 15, React 18, TypeScript, shadcn/ui, Tailwind CSS
 - **Package Manager**: pnpm with workspace support
 - **Development Tools**: ESLint (Next.js config), Prettier, TypeScript strict mode
@@ -760,12 +829,14 @@ Chat Blossom represents a significant advancement in AI chatbot technology, comb
 - **Monitoring**: Vercel Analytics, Supabase Monitoring, Next.js built-in metrics
 
 ### Appendix B: Compliance Requirements
+
 - **GDPR**: Data protection and user rights compliance
 - **CCPA**: California consumer privacy compliance
 - **SOC 2**: Security and availability controls
 - **Accessibility**: WCAG 2.1 AA compliance for inclusive design
 
 ### Appendix C: Performance Benchmarks
+
 - **Load Testing**: 10,000 concurrent users
 - **Stress Testing**: Peak traffic simulation
 - **Security Testing**: Penetration testing and vulnerability assessment
@@ -773,4 +844,4 @@ Chat Blossom represents a significant advancement in AI chatbot technology, comb
 
 ---
 
-*This PRD is a living document and will be updated as requirements evolve and new insights are gathered during development.*
+_This PRD is a living document and will be updated as requirements evolve and new insights are gathered during development._

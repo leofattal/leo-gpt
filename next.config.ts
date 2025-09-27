@@ -1,12 +1,12 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typescript: {
-    tsconfigPath: './tsconfig.json',
+    tsconfigPath: "./tsconfig.json",
   },
   eslint: {
-    dirs: ['src'],
+    dirs: ["src"],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

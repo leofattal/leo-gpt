@@ -1,39 +1,39 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Send, Paperclip, Mic } from 'lucide-react'
-import { useState, KeyboardEvent } from 'react'
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Send, Paperclip, Mic } from "lucide-react";
+import { useState, KeyboardEvent } from "react";
 
 interface ChatInputProps {
-  onSendMessage: (message: string) => Promise<void>
-  disabled?: boolean
+  onSendMessage: (message: string) => Promise<void>;
+  disabled?: boolean;
 }
 
 export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
-  const [message, setMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSendMessage = async () => {
     if (message.trim() && !disabled && !isSubmitting) {
       try {
-        setIsSubmitting(true)
-        await onSendMessage(message.trim())
-        setMessage('')
+        setIsSubmitting(true);
+        await onSendMessage(message.trim());
+        setMessage("");
       } catch (error) {
-        console.error('Failed to send message:', error)
+        console.error("Failed to send message:", error);
       } finally {
-        setIsSubmitting(false)
+        setIsSubmitting(false);
       }
     }
-  }
+  };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
-  }
+  };
 
   return (
     <div className="flex items-center space-x-2">
@@ -58,7 +58,7 @@ export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
       </Button>
 
       {/* Text input */}
-      <div className="flex-1 relative">
+      <div className="relative flex-1">
         <Input
           placeholder="Type your message..."
           value={message}
@@ -82,5 +82,5 @@ export function ChatInput({ onSendMessage, disabled }: ChatInputProps) {
         )}
       </Button>
     </div>
-  )
+  );
 }

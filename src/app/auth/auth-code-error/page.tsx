@@ -1,6 +1,12 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
 
 export default function AuthCodeErrorPage() {
   return (
@@ -15,8 +21,9 @@ export default function AuthCodeErrorPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-sm text-muted-foreground text-center">
-            Please try signing in again. If the problem persists, please contact support.
+          <p className="text-center text-sm text-muted-foreground">
+            Please try signing in again. If the problem persists, please contact
+            support.
           </p>
           <Button asChild className="w-full">
             <Link href="/login">Try Again</Link>
@@ -24,10 +31,10 @@ export default function AuthCodeErrorPage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
 
 export const metadata = {
-  title: 'Authentication Error - LeoGPT',
-  description: 'Authentication error occurred',
-}
+  title: "Authentication Error - LeoGPT",
+  description: "Authentication error occurred",
+};

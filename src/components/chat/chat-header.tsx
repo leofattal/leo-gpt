@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Separator } from '@/components/ui/separator'
-import { useAuth } from '@/lib/hooks/use-auth'
-import { LogOut, Settings, User, Menu } from 'lucide-react'
-import Link from 'next/link'
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+import { useAuth } from "@/lib/hooks/use-auth";
+import { LogOut, Settings, User, Menu } from "lucide-react";
+import Link from "next/link";
 
 export function ChatHeader() {
-  const { user, signOut } = useAuth()
+  const { user, signOut } = useAuth();
 
   return (
     <header className="border-b border-border bg-background px-4 py-3">
@@ -57,5 +57,5 @@ export function ChatHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }
